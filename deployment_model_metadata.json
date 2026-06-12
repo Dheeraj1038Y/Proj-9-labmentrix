@@ -1,0 +1,89 @@
+{
+  "model_name": "Base GRU - Tesla Stock Price Prediction",
+  "model_type": "GRU (Gated Recurrent Unit)",
+  "input_shape": [
+    30,
+    13
+  ],
+  "lookback_window": 30,
+  "num_features": 13,
+  "forecast_horizon": 1,
+  "architecture": {
+    "gru_layer_1_units": 100,
+    "gru_layer_2_units": 50,
+    "dropout_rate": 0.2,
+    "dense_hidden_units": 25,
+    "output_units": 1
+  },
+  "training_config": {
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "clipnorm": 1.0,
+    "loss_function": "MSE",
+    "batch_size": 32,
+    "epochs_trained": 41,
+    "max_epochs": 100
+  },
+  "performance_metrics": {
+    "r2_score": 0.9289,
+    "mae_dollars": 15.41,
+    "rmse_dollars": 19.84,
+    "mape_percent": 5.18
+  },
+  "training_data": {
+    "total_samples": 2111,
+    "train_samples": 1688,
+    "test_samples": 423,
+    "train_ratio": 0.8,
+    "train_date_range": "2011-04-12 to 2018-04-26",
+    "test_date_range": "2018-04-27 to 2020-01-31"
+  },
+  "feature_names": [
+    "Price_MA_20",
+    "Price_MA_50",
+    "Close_Lag5",
+    "Close_Lag1",
+    "Momentum_20",
+    "Max_Price_20",
+    "MA_200",
+    "Volume_MA_20",
+    "Volume_MA_50",
+    "MA_50",
+    "Min_Price_20",
+    "Cumulative_Returns",
+    "Price_MA_200"
+  ],
+  "feature_importance_top_3": [
+    {
+      "rank": 1,
+      "feature": "Close_Lag1",
+      "importance": 87.3,
+      "description": "Price 1 day ago"
+    },
+    {
+      "rank": 2,
+      "feature": "Momentum_20",
+      "importance": 76.5,
+      "description": "20-day momentum"
+    },
+    {
+      "rank": 3,
+      "feature": "Close_Lag5",
+      "importance": 75.3,
+      "description": "Price 5 days ago"
+    }
+  ],
+  "scalers": {
+    "target_scaler": "MinMaxScaler(feature_range=(0, 1))",
+    "target_scaler_min": 21.950001,
+    "target_scaler_max": 650.570007,
+    "feature_scaler": "MinMaxScaler(feature_range=(0, 1))",
+    "scaler_fit_samples": 2111
+  },
+  "deployment_notes": "Production-ready. Requires daily retraining for optimal performance.",
+  "created_date": "2026-06-11 10:16:08",
+  "version": "1.0",
+  "python_version": "3.12",
+  "tensorflow_version": "2.20.0",
+  "keras_version": "3.13.2"
+}
